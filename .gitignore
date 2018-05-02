@@ -1,3 +1,22 @@
-
+# dependencies
 node_modules
 
+# logs
+npm-debug.log
+
+# Nuxt build
+.nuxt
+.nodeenv
+
+# Nuxt generate
+dist
+build
+
+# other files
+.env
+start.sh
+
+.DS_Store
+
+# *.lock
+*.log

@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
   /*
   ** Headers of the page
@@ -12,11 +14,11 @@ module.exports = {
   ],
 
   head: {
-    title: 'tvr-iims',
+    // title: 'tvr-iims',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' }
+      // { hid: 'description', name: 'description', content: '' }
     ],
     script: [
       { src:'https://use.fontawesome.com/releases/v5.0.9/js/all.js'}
@@ -30,7 +32,7 @@ module.exports = {
   /*
   ** Customize the progress bar color
   */
-  loading: { color: '#3B8070' },
+  // loading: { color: '#3B8070' },
   /*
   ** Build configuration
   */
@@ -49,7 +51,15 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
-   vendor:['axios'],
+    plugins: [
+      new webpack.ProvidePlugin({
+        '$': 'jquery',
+        jquery: 'jquery',
+        'window.jQuery': 'jquery',
+        jQuery: 'jquery'
+      })
+    ],
+    vendor:['axios', 'jquery'],
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
