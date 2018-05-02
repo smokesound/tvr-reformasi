@@ -8,17 +8,17 @@
               <div class="offset-4 col-2">
                 <div v-if="isi" style="color:#fff; vertical-align: center;">
                   <div class="bounceInRight animated">
-                    <img src="../assets/img/bg.png" class="" style="position: relative;"> 
-                    <img src="../assets/img/Group.png" class="absolute awan">
-                    <img src="../assets/img/spaceship.png" class="absolute roket animated infinite shake">
+                    <img src="~assets/img/bg.png" class="" style="position: relative;"> 
+                    <img src="~assets/img/Group.png" class="absolute awan">
+                    <img src="~assets/img/spaceship.png" class="absolute roket animated infinite shake">
                     <div>
-                      <button type="button" class="btn button-tahun" @click=colok()>Pencet Jing</button>
+                      <button type="button" class="btn button-tahun" @click="colok()">Pencet Jing</button>
                     </div>
                   </div>
                 </div>
                 <div v-else class="bounceInLeft animated" style="color:#fff">
                   <div>
-                    <button type="button" class="btn button-tahun" @click=colok()>Pencet su</button>
+                    <button type="button" class="btn button-tahun" @click="colok()">Pencet su</button>
                   </div>   
                 </div>
               </div>
@@ -28,7 +28,7 @@
             <div class="col-12" style="text-align: center">
               <div class="opendetail" @click="openDetail(banner.text, banner.detail, banner.image)">See Details</div>
               <div>
-                <button type="button" class="btn button-tahun" @click=colok()>Pencet Jing</button>
+                <button type="button" class="btn button-tahun" @click="colok()">Pencet Jing</button>
               </div>
             </div>
           </div>
@@ -42,6 +42,8 @@
 import axios from 'axios'
 
 export default {
+  name: 'tvriims_mobile',
+  layout: 'tvriims',
   async asyncData({ app }) {
     let [univ] = await Promise.all([
       axios.get('https://ot.tirto.id/tvr/tvriimsapril2018').then((data) => data.data)
@@ -61,7 +63,7 @@ export default {
       this.detail = detail
       this.url = url
       this.kambing = true
-      console.log("pressed")
+      console.log('pressed')
     },
     closePopup() {
       this.kambing = false
@@ -72,7 +74,7 @@ export default {
       } else {
         this.isi = false
       }
-      console.log("kepencet kok")
+      console.log('kepencet kok')
     }
   },
   data() {
@@ -90,7 +92,6 @@ export default {
         slideToClickedSlide: false,
         noSwipingSelector: '.swiper-slide',
         noSwiping: true,
-        noSwiping : true,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
@@ -99,14 +100,6 @@ export default {
         pagination: {
           el: '.swiper-pagination',
           dynamicBullets: true
-        },
-        on: {
-          slideChange() {
-            console.log('onSlideChangeEnd', this);
-          },
-          tap() {
-            // console.log('onTap', this);
-          }
         }
       }
     }
