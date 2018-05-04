@@ -5,8 +5,8 @@
         <div class="col-12 col-md-8 offset-md-2">
           <div class="container-fluid p-3 mt-3" style="background-color: #aaa">
             <div class="row">
-              <div class="col-12" v-for="banner in allimage" :key="banner.no" v-if="banner.status">
-                <div v-if="section1" style="color:#fff; vertical-align: center;">
+              <div class="col-12" v-for="banner in allimage" :key="banner.no" v-if="banner.status === 'TRUE'">
+                <div style="color:#fff; vertical-align: center;">
                   <div class="bounceInRight animated">
                     <div class="box">
                       <img :src="banner.image1" class="static" style="position: relative;">
@@ -22,7 +22,7 @@
                           <button type="button" class="btn button-tahun" @click=aktifcus(banner.urlbutton1)>{{banner.teksbutton1}}</button>
                         </div>
                         <div class="col-6">
-                          <button type="button" class="btn button-tahun" @click=bukaSection3(banner.urlbutton2)>{{banner.teksbutton2}}</button>
+                          <button type="button" class="btn button-tahun" @click=aktifcus(banner.urlbutton2)>{{banner.teksbutton2}}</button>
                         </div>
                       </div>
                     </div>
@@ -30,8 +30,13 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-12 col-md-4 offset-md-4 text-center">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+            <!-- <div class="row">
+              <div class="col-12 col-md-4 offset-md-4 text-center"> -->
 <!--            <div v-if="section1" style="color:#fff; vertical-align: center;">
                   <div class="bounceInRight animated">
                     <div class="box">
@@ -52,7 +57,7 @@
                     </div>
                   </div>
                 </div> -->
-                <div v-if="section2 == true" style="color:#fff; vertical-align: center;">
+<!--                 <div v-if="section2 == true" style="color:#fff; vertical-align: center;">
                   <div class="bounceInLeft animated">
                     <div class="box">
                       <img src="~/assets/img/bg.png" class="static" style="position: relative;"> 
@@ -144,14 +149,14 @@
                       <button type="button" class="btn button-tahun" @click=bukaSection1()>Balik Yak</button>
                     </div>
                   </div>
-                </div>
-              </div>
+                </div> -->
+<!--               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -170,7 +175,7 @@ export default {
       imagename: univ.data.Sheet1.text,
       audinih: univ.data.Sheet1[4].image
     }
-    console.log(result.audinih)
+    console.log(result.allimage)
     return result
   },
   methods: {
@@ -258,14 +263,21 @@ export default {
       }
       console.log('kepencet kok')
     },
-    aktifcus() {
+    aktifcus(url) {
       this.isRocketCus = !this.isRocketCus
       this.isRocketSmooth = !this.isRocketSmooth
       setTimeout(() => {
-        this.section2 = true
-        this.section1 = false
+        let datas = this.allimage
+        datas.map((x) => {
+          x.status = 'FALSE'
+        })
+        console.log(datas)
+        this.allimage[url - 1].status = 'TRUE'
+        // this.allimage[url - 2].status = 'FALSE'
       }, 3000)
       console.log(this.isRocketCus, this.isRocketSmooth)
+      console.log(url)
+      console.log(this.allimage[url - 1])
     }
   },
   data() {
